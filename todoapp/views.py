@@ -14,3 +14,9 @@ def add_task(request):
         task = request.POST['task']
         Task.objects.create(task=task)
         return redirect('home')
+
+def complete_task(request, pk):
+    task = Task.objects.get(pk=pk)
+    task.is_completed = True
+    task.save()
+    return redirect('home')
