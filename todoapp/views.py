@@ -28,6 +28,10 @@ def delete_task(request, pk):
 
 def update_task(request, pk):
     task = get_object_or_404(Task, pk=pk)
-    task.task = request.POST['task']
-    task.save()
-    return redirect('home')
+    if request.method == 'POST':
+        task.task = request.POST['task']
+        task.save()
+        return redirect('home')
+    else:
+         context = {'task': task}
+    return render(request, 'edit_task.html', context)
