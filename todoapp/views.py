@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Task
 # Create your views here.
 
@@ -16,7 +16,7 @@ def add_task(request):
         return redirect('home')
 
 def complete_task(request, pk):
-    task = Task.objects.get(pk=pk)
+    task = get_object_or_404(Task, pk=pk)
     task.is_completed = True
     task.save()
     return redirect('home')
