@@ -20,3 +20,14 @@ def complete_task(request, pk):
     task.is_completed = True
     task.save()
     return redirect('home')
+
+def delete_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return redirect('home')
+
+def update_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.task = request.POST['task']
+    task.save()
+    return redirect('home')
